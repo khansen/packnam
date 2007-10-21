@@ -106,8 +106,7 @@ int main(int argc, char **argv)
             int x = 0;
             int state = 0;
             int start_rle = 0;
-            int addr = vram_address + (y * width);
-            printf("%d\n", y);
+            int addr = vram_address + (y * 32);
             while (x < width) {
                 const char ch = nametable[in_pos];
                 switch (state) {
