@@ -117,6 +117,14 @@ int main(int argc, char **argv)
                             && (nametable[in_pos+3] == ch);
                     /* fallthrough */
                     case 1:
+                    if (ch == 0) {
+                        /* don't encode 0s */
+                        start_rle = 0;
+                        ++in_pos;
+                        ++x;
+                        ++addr;
+                        break;
+                    }
                     if (out_pos + 2 >= buf_sz) {
                         buf_sz += 64;
                         out = (char *)realloc(out, buf_sz);
