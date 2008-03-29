@@ -1,10 +1,26 @@
-packnam: packnam.o
-	$(CC) packnam.o -o packnam
+INSTALL = install
+CFLAGS = -Wall -g
+LFLAGS =
+OBJS = packnam.o
+
+prefix = /usr/local
+datarootdir = $(prefix)/share
+datadir = $(datarootdir)
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)/bin
+infodir = $(datarootdir)/info
+mandir = $(datarootdir)/man
+
+packnam: $(OBJS)
+	$(CC) $(LFLAGS) $(OBJS) -o packnam
 
 %.o: %.c
-	$(CC) -Wall -g -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
+
+install: packnam
+	$(INSTALL) -m 0755 packnam $(bindir)
 
 .PHONY: clean
 
 clean:
-	rm -f *.o packnam packnam.exe
+	rm -f $(OBJS) packnam packnam.exe

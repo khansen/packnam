@@ -27,7 +27,8 @@ static void usage()
 {
     printf(
         "Usage: packnam [--width=NUM] [--vram-address=NUM]\n"
-        "               [--output=FILE] [--verbose]\n"
+        "               [--output=FILE] [--zero-terminate]\n"
+        "               [--verbose]\n"
         "               [--help] [--usage] [--version]\n"
         "                FILE\n");
     exit(0);
@@ -42,6 +43,7 @@ static void help()
            "  --width=NUM                     Width of input is NUM tiles (32)\n"
            "  --vram-address=NUM              VRAM start address (0x2000)\n"
            "  --output=FILE                   Store encoded data in FILE\n"
+           "  --zero-terminate                Zero-terminate the output\n"
            "  --verbose                       Print statistics\n"
            "  --help                          Give this help list\n"
            "  --usage                         Give a short usage message\n"
@@ -61,7 +63,8 @@ static void version()
   its size in \a out_sz.
 */
 void pack_nametable(const unsigned char *nametable, int nametable_sz,
-                    int width, int vram_address, unsigned char **out, int *out_sz)
+                    int width, int vram_address, int zero_terminate,
+                    unsigned char **out, int *out_sz)
 {
     int out_pos = 0;
     int buf_sz = 0;
@@ -196,6 +199,13 @@ void pack_nametable(const unsigned char *nametable, int nametable_sz,
 	}
 	++y;
     }
+    if (zero_terminate) {
+	if (out_pos + 1 >= buf_sz) {
+	    buf_sz += 1;
+	    *out = (unsigned char *)realloc(*out, buf_sz);
+	}
+        (*out)[out_pos++] = 0;
+    }
     *out_sz = out_pos;
 }
 
@@ -211,6 +221,7 @@ int main(int argc, char **argv)
     int width = 32;
     int vram_address = 0x2000;
     int verbose = 0;
+    int zero_terminate = 0;
     const char *input_filename = 0;
     const char *output_filename = 0;
     /* Process arguments. */
@@ -225,6 +236,8 @@ int main(int argc, char **argv)
                     vram_address = strtol(&opt[13], 0, 0);
                 } else if (!strncmp("output=", opt, 7)) {
                     output_filename = &opt[7];
+                } else if (!strcmp("zero-terminate", opt)) {
+                    zero_terminate = 1;
                 } else if (!strcmp("verbose", opt)) {
                     verbose = 1;
                 } else if (!strcmp("help", opt)) {
@@ -267,7 +280,7 @@ int main(int argc, char **argv)
     /* Compress */
     if (verbose)
         fprintf(stdout, "processing\n");
-    pack_nametable(nametable, nametable_sz, width, vram_address, &out, &out_sz);
+    pack_nametable(nametable, nametable_sz, width, vram_address, zero_terminate, &out, &out_sz);
 
     /* Write output */
     if (!output_filename)
