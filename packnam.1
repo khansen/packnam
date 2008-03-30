@@ -48,7 +48,7 @@ as nametable width (tiles per row). If this option is not specified, the width i
 .RS 4
 Use
 \fInum\fR
-as VRAM start address (i.e. where the first row will be decoded to). This is used to control where in the NES hardware nametable the tile indexes should be written to; for example, to center the graphic or right\-align it. If this option, is not specified, the VRAM start address will be 0x2000 (beginning of NES hardware nametable #0).
+as VRAM start address (i.e. where the first row will be decoded to). This is used to control where in the NES hardware nametable the tile indexes should be written to; for example, to center the graphic or right\-align it. If this option is not specified, the VRAM start address will be 0x2000 (beginning of NES hardware nametable #0).
 .RE
 .PP
 \fB\-\-output\fR=\fIfile\fR
@@ -87,7 +87,7 @@ Print program version.
 .PP
 The input nametable is typically one produced by the
 \fBpackchr\fR
-tool, or by your favorite hex editor (extra points!).
+tool, or by your favorite hex editor (extra points!). It's just a series of tile indexes, each index being one byte (references a tile in the range 0..255).
 .SS "Output"
 .PP
 The output is a sequence of strings of the following format:

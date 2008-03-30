@@ -35,7 +35,7 @@ a NES hardware nametable).
 Use <em class="parameter"><code>num</code></em> as VRAM start address (i.e. where the
 first row will be decoded to). This is used to control where in the
 NES hardware nametable the tile indexes should be written to; for
-example, to center the graphic or right-align it. If this option, is
+example, to center the graphic or right-align it. If this option is
 not specified, the VRAM start address will be 0x2000 (beginning of NES
 hardware nametable #0).
 </p></dd><dt><span class="term">
@@ -67,8 +67,9 @@ Print program version.
 </p></dd></dl></div></div><div class="refsect1" lang="en"><a name="id454740"></a><h2>Files</h2><div class="refsect2" lang="en"><a name="id454745"></a><h3>Input</h3><p>
 The input nametable is typically one produced by
 the <span><strong class="command">packchr</strong></span> tool, or by your favorite hex editor
-(extra points!).
-</p></div><div class="refsect2" lang="en"><a name="id454762"></a><h3>Output</h3><p>
+(extra points!). It's just a series of tile indexes, each index being one
+byte (references a tile in the range 0..255).
+</p></div><div class="refsect2" lang="en"><a name="id454764"></a><h3>Output</h3><p>
 The output is a sequence of strings of the following format:
 </p><p>
 byte 0: high VRAM address
@@ -103,13 +104,13 @@ things when displaying the image on the NES.
 (A simple way of setting up the palette and attribute
 table is by "tacking on" their data to packnam's output;
 use the string format described above.)
-</p></div></div><div class="refsect1" lang="en"><a name="id454820"></a><h2>Examples</h2><p>
+</p></div></div><div class="refsect1" lang="en"><a name="id454822"></a><h2>Examples</h2><p>
 To pack <code class="literal">mynametab.nam</code>, using 6 tiles per row and
 putting the graphic halfway down the screen:
 </p><p>
 <strong class="userinput"><code>
 packnam --width=6 --vram-address=0x21B0 mynametab.nam
 </code></strong>
-</p></div><div class="refsect1" lang="en"><a name="id454845"></a><h2>See Also</h2><p>
+</p></div><div class="refsect1" lang="en"><a name="id454847"></a><h2>See Also</h2><p>
 packchr(1)
 </p></div></div></body></html>
