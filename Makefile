@@ -20,7 +20,7 @@ packnam: $(OBJS)
 install: packnam
 	$(INSTALL) -m 0755 packnam $(bindir)
 
-.PHONY: clean
-
 clean:
 	rm -f $(OBJS) packnam packnam.exe
+
+.PHONY: clean install
