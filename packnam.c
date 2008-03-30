@@ -38,10 +38,10 @@ static void usage()
 static void help()
 {
     printf("Usage: packnam [OPTION...] FILE\n\n"
-           "packnam compresses a NES nametable.\n\n"
+           "packnam encodes a raw NES nametable.\n\n"
            "Options:\n\n"
-           "  --width=NUM                     Width of input is NUM tiles (32)\n"
-           "  --vram-address=NUM              VRAM start address (0x2000)\n"
+           "  --width=NUM                     Use NUM as nametable width (tiles per row) (32)\n"
+           "  --vram-address=NUM              Use NUM as VRAM start address (0x2000)\n"
            "  --output=FILE                   Store encoded data in FILE\n"
            "  --zero-terminate                Zero-terminate the output\n"
            "  --verbose                       Print statistics\n"

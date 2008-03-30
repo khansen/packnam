@@ -19,6 +19,7 @@ packnam: $(OBJS)
 
 install: packnam
 	$(INSTALL) -m 0755 packnam $(bindir)
+	$(INSTALL) -m 0444 packnam.1 $(mandir)/man1
 
 clean:
 	rm -f $(OBJS) packnam packnam.exe

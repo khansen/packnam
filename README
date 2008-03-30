@@ -1,35 +1,8 @@
-packnam converts a raw NES nametable (representing some
-graphical image) into a format that's easily decoded by
-6502 code (i.e. so it can be displayed by the NES).
+This is packnam, a tool that converts a raw NES nametable (that is, an
+array of tile indexes) into a format that can be readily decoded by
+6502 code (i.e. so the image can be displayed on the NES).
 
-The input nametable is typically one produced by the
-packchr tool.
+See INSTALL for installation instructions.
 
-The output is a sequence of strings of the following format:
-byte 0: high VRAM address
-byte 1: low VRAM address
-byte 2: bits 0-5 length of data string (repeat count if RLE)
-        bit 6 is data RLE? (1 = yes)
-        bit 7 VRAM address increment (0 = 1, 1 = 32)
-byte 3-..: data. Only 1 byte if string is RLE
-
-6502 code for decoding data of this format can be found
-elsewhere, e.g. in the NeoToxin sources (ppuwrite.asm).
-In your 6502 sources, you can then do something like:
-
-  my_nametable_data:
-  .incbin "mynametable.dat" ; mynametable.dat produced by packnam
-  .db 0 ; data terminator
-
-  ...
-
-  lda #<my_nametable_data
-  ldy #>my_nametable_data
-  jsr write_ppu_data_at     ; call decoder function
-
-packnam does not deal with CHR data, palette data or
-attribute data; you are responsible for setting up those
-things when displaying the image on the NES.
-(A simple way of setting up the palette and attribute
-table is by "tacking on" their data to packnam's output;
-use the string format described above.)
+See doc/index.html for documentation, or do "man packnam" after
+installation.
