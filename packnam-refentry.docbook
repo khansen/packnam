@@ -1,18 +1,19 @@
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-  "/sw/share/xml/dtd/docbookx/4.5.0/docbookx.dtd">
-
 <refentry id="packnam">
 
 <refentryinfo>
 <author>
 <firstname>Kent</firstname>
 <surname>Hansen</surname>
+<contrib>Author</contrib>
 </author>
 </refentryinfo>
 
 <refmeta>
-<refentrytitle>packnam</refentrytitle>
-<manvolnum>1</manvolnum>
+  <refentrytitle>packnam</refentrytitle>
+  <manvolnum>1</manvolnum>
+  <refmiscinfo class="source">packnam</refmiscinfo>
+  <refmiscinfo class="version">1.0</refmiscinfo>
+  <refmiscinfo class="manual">packnam</refmiscinfo>
 </refmeta>
 
 <refnamediv>
